@@ -1,13 +1,14 @@
-:iphone: + :notebook: = :mortar_board:
-
 # Virtual Binder
 
 Virtual Binder is an easy way to organize your studying materials, making it
-easy to study more efficiently.
+easy to study more efficiently. Combine our way to organize to your dedication
+to achieve your degree.
+
+:iphone: + :notebook: = :mortar_board:
 
 ## What can I do?
 
-With Virtual Binder you can add the files downloaded to your cellphone to the
+With Virtual Binder you can add the files downloaded to your smartphone to the
 app, defining subjects, teachers, type of file (notes, old tests, etc) and some
 other tags to organize them. 
 
