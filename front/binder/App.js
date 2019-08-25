@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Text, TextInput, Picker, Button, TouchableOpacity, ImageBackground, TouchableHighlight } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Text, TextInput, Picker, Button, TouchableOpacity, ImageBackground, TouchableHighlight, Alert } from 'react-native';
 import { AppLoading, Asset, Icon } from 'expo';
 import * as Font from 'expo-font';
 import { createStackNavigator, createAppContainer } from "react-navigation";
