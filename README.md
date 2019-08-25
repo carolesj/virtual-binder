@@ -16,7 +16,7 @@ With Easy Binder you can add the files downloaded to your smartphone to the
 app, defining subjects, teachers, type of file (notes, old tests, etc) and some
 other tags to organize them. 
 
-## Why would I use Virtual Binder?
+## Why would I use Easy Binder?
 
 We all know how hard it is, sometimes, to keep our studying up to date.
 Sometimes, its even harder if we cannot organize properly. Easy Binder will
