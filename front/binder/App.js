@@ -1,12 +1,17 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Text, TextInput, Picker, Button, TouchableOpacity } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Text, TextInput, Picker, Button, TouchableOpacity, ImageBackground, TouchableHighlight } from 'react-native';
 import { AppLoading, Asset, Icon } from 'expo';
 import * as Font from 'expo-font';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import {Materia} from './components/materia';
+import {IcoLi} from './components/icoLi';
+import {MenuLateral} from './components/menuLateral';
+import { SwitchDay } from "./components/switchDay";
+import { Grade } from "./components/grade";
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
-
-
-export default class App extends React.Component {
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -29,7 +34,7 @@ export default class App extends React.Component {
       }
         else{
           return(
-            <View style={{backgroundColor: '#FAF36C50', flex: 1}}>
+            <View style={{backgroundColor: '#FFF7DF', flex: 1}}>
               <Text style = {styles.textHeader}>Adicionar Arquivo</Text>
               <View style={{flexDirection:"row", justifyContent: 'center'}}>
                 <View>
@@ -87,7 +92,8 @@ export default class App extends React.Component {
                 </Text>
               </TouchableOpacity>
               <View style={{justifyContent:"flex-end", flexDirection: 'row'}}>
-                <TouchableOpacity style = {[styles.button , {justifyContent: "flex-start"}]}>
+                <TouchableOpacity style = {[styles.button , {justifyContent: "flex-start"}]}
+                  onPress={() => this.props.navigation.navigate('Calc')}>
                   <Text style = {{
                       backgroundColor: 'white', 
                       color: '#F28864', 
@@ -100,7 +106,8 @@ export default class App extends React.Component {
                     Voltar
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style = {[styles.button , {justifyContent: "flex-end"} ]}>
+                <TouchableOpacity style = {[styles.button , {justifyContent: "flex-end"}]}
+                onPress={() => this.props.navigation.navigate('Calc')}>
                   <Text style = {{
                       backgroundColor: '#F28864', 
                       color: 'white', 
@@ -139,16 +146,157 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
+
+class MenuCalc extends React.Component {
+  constructor(props){
+      super(props);
+      this.botoes = [
+          {name:"+" , img:"calc1", bgColor:"rgba(242, 136, 100, 0.32)" ,brColor:"#F28864" , click:() => {props.navigation.navigate('Sub')}},
+          {name:"List", img:"calc1" , bgColor:"rgba(250, 243, 108, 0.56)", brColor:"#FAF36C",click:()=>{Alert.alert("cliclo")}},
+          {name:"Prov", img:"calc1" , bgColor:"rgba(250, 243, 108, 0.56)", brColor:"#FAF36C", click:()=>{Alert.alert("cliclo")}},
+          {name:"Slid" , img:"calc1" , bgColor:"rgba(250, 243, 108, 0.56)", brColor:"#FAF36C", click:()=>{Alert.alert("cliclo")}}]
+  };
+
+  render(){
+      return (
+          <View style={styles.root}>
+              <Materia materia="Calculo II" prof="Farid tarid" atendimento="Quarta feira 16h, sala 5-301" lista={[]}></Materia>
+              <MenuLateral botoes={this.botoes}></MenuLateral>
+          </View>
+      );
+  };
+};
+
+class BotaoMenuLateral extends React.Component {
+  constructor(props){
+      super(props);
+      this.nome = props.attr.name;
+      //this.img = "asset:/" + props.attr.img;
+      this.click =  props.attr.click;
+      this.color = props.attr.bgColor;
+      this.brColor = props.attr.brColor;
+  }
+
+  //<Image source={{uri: this.img}} style={{width: 40, height: 40}}/>
+  //<TouchableHighlight onPress={this.click}>
+  //    <View>
+  //        <Text>{this.nome}</Text>
+  //    </View>
+  //</TouchableHighlight>
+
+  render (){
+      return (
+
+          <TouchableHighlight style={{backgroundColor:this.color , borderStyle:'solid' , borderColor:this.brColor , borderWidth:1 , padding:5}} onPress={this.click}>
+              <Text>{this.nome}</Text>
+          </TouchableHighlight>
+
+
+      );
+  };
+
+}
+
+class menuScreen extends React.Component{
+	constructor(props){
+		super(props);
+		this.botoes = [
+			{name:"+", img:"calc1", bgColor:"rgba(242, 136, 100, 0.32)", brColor:"#F28864", click:() => {props.navigation.navigate('Sub')}},
+			{name:"calc", img:"calc1", bgColor:"rgba(250, 243, 108, 0.56)", brColor:"#FAF36C", click:() => {props.navigation.navigate('Calc')}},
+			{name:"ling", img:"calc1", bgColor:"rgba(250, 243, 108, 0.56)", brColor:"#FAF36C", click:()=>{Alert.alert("cliclo")}},
+			{name:"web", img:"calc1", bgColor:"rgba(250, 243, 108, 0.56)", brColor:"#FAF36C", click:()=>{Alert.alert("cliclo")}},
+			{name:"IUC", img:"calc1", bgColor:"rgba(250, 243, 108, 0.56)", brColor:"#FAF36C", click:()=>{Alert.alert("cliclo")}}
+		];
+	}
+
+	render() {
+		return (
+		<View style={styles.container}>
+			<SwitchDay></SwitchDay>
+			<Grade></Grade>
+			<MenuLateral botoes={this.botoes}></MenuLateral>
+		</View>
+		);
+	};
+}
+class TelaInicial extends React.Component {
+  render(){
+      return(
+          <ImageBackground source={require('./assets/plano.png')} style={styles.root1}>
+              <TouchableHighlight style={styles.button2} onPress={() => this.props.navigation.navigate('Main')}>
+                  <Text style={styles.text1}>Iniciar</Text>
+              </TouchableHighlight>
+          </ImageBackground>
+      );
+  }
+};
+
+
+const AppNavigator = createStackNavigator({
+  Sub: {
+    screen: HomeScreen
+  },
+  Calc:{
+    screen: MenuCalc
+  },
+  Main:{
+    screen: menuScreen
+  },
+  Init:{
+    screen: TelaInicial
+  },
+}, {
+    initialRouteName: "Init"
+  
+});
+
+export default createAppContainer(AppNavigator);
+
+
 const styles = StyleSheet.create({
+  root1:{
+    backgroundColor: '#ccc',
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button2:{
+    marginTop: '70%',
+    width: 100,
+    padding: 10,
+    marginBottom: 5,
+    backgroundColor: 'transparent',
+    borderStyle:'solid',
+    borderWidth:3,
+    borderColor:'#FFF',
+  },
+  text1:{
+    textAlign: 'center',
+    color:"#FFF",
+  },
+  peso2:{
+    flex:2
+  },
+  peso4:{
+    flex:4
+  },
+  peso1:{
+    flex:1
+    },
+  containerBotao:{
+    backgroundColor:"#000",
+  },
   textInput: {
-      marginTop: 17,
-      height: 20,
-      width: 100,
-      borderBottomColor: '#F28864',
-      fontFamily: 'Kanit',
-      borderBottomWidth: 1,
-      justifyContent:"center",
-      marginRight: 100,
+    marginTop: 17,
+    height: 20,
+    width: 100,
+    borderBottomColor: '#F28864',
+    fontFamily: 'Kanit',
+    borderBottomWidth: 1,
+    justifyContent:"center",
+    marginRight: 100,
   },
   textHeader: {
     paddingTop: 30,
@@ -177,5 +325,18 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 10,
     marginBottom: 20
-  }
+  },
+  root:{
+    paddingTop:Expo.Constants.statusBarHeight,
+    flex:1,
+    backgroundColor: '#FFF7DF'
+  },
+  container1:{
+    flex:1,
+  },
+  container: {
+	  flex: 1,
+	  paddingTop: Expo.Constants.statusBarHeight,
+	  backgroundColor: '#FFF7DF',
+	}
 });

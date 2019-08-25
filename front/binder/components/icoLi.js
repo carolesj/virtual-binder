@@ -11,7 +11,7 @@ export class IcoLi extends React.Component {
     render(){
         return (
             <View style={styles.container}>
-                <Image source={require('./assets/pdf.png')}  style={{width:80 , height:80}}/>
+                <Image source={require('../assets/pdf.png')}  style={{width:80 , height:80}}/>
                 <Text style={styles.texto}>{this.titulo}</Text>
             </View>
         );

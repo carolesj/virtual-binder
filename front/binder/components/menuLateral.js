@@ -43,7 +43,7 @@ export class MenuLateral extends React.Component {
 const styles = StyleSheet.create({
     container:{
         position:'absolute',
-        backgroundColor: '#fff',
+        backgroundColor: '#FFF7DF',
         right:0,
         paddingTop:Expo.Constants.statusBarHeight,
     },
