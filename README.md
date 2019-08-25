@@ -1,4 +1,8 @@
-# Easy Binder
+<p align="center">
+  <img src="https://i.ibb.co/48rjSBX/Easy-Binder.png"/>
+  <h1 align="center">Easy Binder</h1>
+</p>
+
 
 Easy Binder is an easy way to organize your studying materials, making it
 better to study more efficiently. Combine our way to organize to your dedication
